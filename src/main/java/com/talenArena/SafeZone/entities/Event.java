@@ -1,13 +1,29 @@
 package com.talenArena.SafeZone.entities;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@RequiredArgsConstructor
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "events")
 public class Event {
-    private final String id;
-    private
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String description;
+    private LocalDateTime eventDate;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 }
