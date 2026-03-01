@@ -1,12 +1,18 @@
 package com.talenArena.SafeZone.service;
 
+import com.talenArena.SafeZone.models.CreateSessionRequest;
 import com.talenArena.SafeZone.models.Device;
+import com.talenArena.SafeZone.models.DeviceIpv4Addr;
 import com.talenArena.SafeZone.models.QodSession;
 import com.talenArena.SafeZone.models.CreateQodSessionRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -15,27 +21,31 @@ public class DeviceService {
 
     private final WebClient networkAsCodeWebClient;
 
-    /**
-     * Crea una sesión de Quality on Demand (QoD) para un dispositivo
-     *
-     * @param device Dispositivo para el cual crear la sesión
-     * @param serviceIpv4 Dirección IPv4 del servicio
-     * @param serviceIpv6 Dirección IPv6 del servicio
-     * @param profile Perfil de QoS (ej: "DOWNLINK_L_UPLINK_L")
-     * @param duration Duración de la sesión en segundos
-     * @return QodSession objeto que representa la sesión creada
-     */
-    public QodSession createQodSession(Device device, String serviceIpv4, String serviceIpv6,
-                                       String profile, Integer duration) {
+    @Value("${network.as.code.mock.enabled:false}")
+    private boolean mockEnabled;
+
+    public QodSession createQodSession(CreateSessionRequest qodRequest) {
         log.info("Creando sesión QoD para dispositivo con perfil: {} y duración: {} segundos",
-                profile, duration);
+                qodRequest.getProfile(), qodRequest.getDuration());
+
+        if (mockEnabled) {
+            log.warn("MODO SIMULACIÓN: La llamada a la API externa no se realizará. Devolviendo una respuesta simulada.");
+            return createMockSession(qodRequest);
+        }
+
+        DeviceIpv4Addr ipv4Addr = DeviceIpv4Addr.builder()
+                .publicAddress(qodRequest.getPublicAddress())
+                .build();
+
+        Device device = Device.builder()
+                .ipv4Address(ipv4Addr)
+                .build();
 
         CreateQodSessionRequest request = CreateQodSessionRequest.builder()
                 .device(device)
-                .serviceIpv4(serviceIpv4)
-                .serviceIpv6(serviceIpv6)
-                .qosProfile(profile)
-                .duration(duration)
+                .serviceIpv4(qodRequest.getServiceIpv4())
+                .qosProfile(qodRequest.getProfile())
+                .duration(qodRequest.getDuration())
                 .build();
 
         try {
@@ -53,6 +63,16 @@ public class DeviceService {
             log.error("Error al crear sesión QoD: {}", e.getMessage(), e);
             throw new RuntimeException("No se pudo crear la sesión QoD", e);
         }
+    }
+
+    private QodSession createMockSession(CreateSessionRequest qodRequest) {
+        QodSession mockSession = new QodSession();
+        mockSession.setSessionId(UUID.randomUUID().toString());
+        mockSession.setQosProfile(qodRequest.getProfile());
+        mockSession.setDuration(qodRequest.getDuration());
+        mockSession.setStartedAt(LocalDateTime.now());
+        mockSession.setExpiresAt(LocalDateTime.now().plusSeconds(qodRequest.getDuration()));
+        return mockSession;
     }
 
     /**
@@ -103,4 +123,3 @@ public class DeviceService {
         }
     }
 }
-

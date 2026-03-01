@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "events")
+@Table(name = "event")
 public class Event {
 
     @Id
@@ -22,8 +22,5 @@ public class Event {
 
     private String name;
     private String description;
-    private LocalDateTime eventDate;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDateTime date;
 }
