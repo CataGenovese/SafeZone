@@ -1,4 +1,4 @@
-package com.talenArena.SafeZone.models;
+package com.talenArena.SafeZone.models.QoS;
 
 /**
  * Perfiles QoS predefinidos para sesiones de Quality on Demand.

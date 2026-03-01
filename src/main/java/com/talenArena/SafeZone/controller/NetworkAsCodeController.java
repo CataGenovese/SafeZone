@@ -1,7 +1,7 @@
 package com.talenArena.SafeZone.controller;
 
-import com.talenArena.SafeZone.models.CreateSessionRequest;
-import com.talenArena.SafeZone.models.QodSession;
+import com.talenArena.SafeZone.models.QoS.CreateSessionRequest;
+import com.talenArena.SafeZone.models.QoS.QodSession;
 import com.talenArena.SafeZone.service.DeviceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -277,6 +277,7 @@ public class DeviceIpv4Addr {
 package com.talenArena.SafeZone.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.talenArena.SafeZone.models.QoS.DeviceIpv4Addr;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -310,6 +311,7 @@ public class Device {
 package com.talenArena.SafeZone.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.talenArena.SafeZone.models.QoS.Device;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -360,6 +362,7 @@ public class QodSession {
 package com.talenArena.SafeZone.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.talenArena.SafeZone.models.QoS.Device;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -397,8 +400,8 @@ public class CreateQodSessionRequest {
 ```java
 package com.talenArena.SafeZone.service;
 
-import com.talenArena.SafeZone.models.Device;
-import com.talenArena.SafeZone.models.DeviceIpv4Addr;
+import com.talenArena.SafeZone.models.QoS.Device;
+import com.talenArena.SafeZone.models.QoS.DeviceIpv4Addr;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -452,9 +455,9 @@ public class NetworkAsCodeClient {
 ```java
 package com.talenArena.SafeZone.service;
 
-import com.talenArena.SafeZone.models.Device;
+import com.talenArena.SafeZone.models.QoS.Device;
 import com.talenArena.SafeZone.models.QodSession;
-import com.talenArena.SafeZone.models.CreateQodSessionRequest;
+import com.talenArena.SafeZone.models.QoS.CreateQodSessionRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -562,8 +565,8 @@ public class DeviceService {
 ```java
 package com.talenArena.SafeZone.controller;
 
-import com.talenArena.SafeZone.models.Device;
-import com.talenArena.SafeZone.models.DeviceIpv4Addr;
+import com.talenArena.SafeZone.models.QoS.Device;
+import com.talenArena.SafeZone.models.QoS.DeviceIpv4Addr;
 import com.talenArena.SafeZone.models.QodSession;
 import com.talenArena.SafeZone.service.DeviceService;
 import com.talenArena.SafeZone.service.NetworkAsCodeClient;

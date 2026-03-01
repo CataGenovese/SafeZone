@@ -1,7 +1,7 @@
 package com.talenArena.SafeZone.service;
 
-import com.talenArena.SafeZone.models.CreateGeofencingSubscriptionRequest;
-import com.talenArena.SafeZone.models.GeofencingSubscription;
+import com.talenArena.SafeZone.models.geofencing.CreateGeofencingSubscriptionRequest;
+import com.talenArena.SafeZone.models.geofencing.GeofencingSubscription;
 import com.talenArena.SafeZone.models.geofencing.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +14,10 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Service
 public class GeofencingService {
+
+    private static final String HEADER_RAPIDAPI_KEY = "X-Rapidapi-Key";
+    private static final String HEADER_RAPIDAPI_HOST = "X-Rapidapi-Host";
+    private static final String RAPIDAPI_HOST_VALUE = "network-as-code.nokia.rapidapi.com";
 
     private final WebClient webClient;
     private final boolean mockEnabled;
@@ -42,8 +46,8 @@ public class GeofencingService {
 
         return webClient.post()
                 .uri("/geofencing-subscriptions/v0.3/subscriptions")
-                .header("X-Rapidapi-Key", rapidApiKey)
-                .header("X-Rapidapi-Host", "network-as-code.nokia.rapidapi.com")
+                .header(HEADER_RAPIDAPI_KEY, rapidApiKey)
+                .header(HEADER_RAPIDAPI_HOST, RAPIDAPI_HOST_VALUE)
                 .bodyValue(request)
                 .retrieve()
                 .bodyToMono(GeofencingSubscription.class)
@@ -61,8 +65,8 @@ public class GeofencingService {
 
         return webClient.get()
                 .uri("/geofencing-subscriptions/v0.3/subscriptions/{subscriptionId}", subscriptionId)
-                .header("X-Rapidapi-Key", rapidApiKey)
-                .header("X-Rapidapi-Host", "network-as-code.nokia.rapidapi.com")
+                .header(HEADER_RAPIDAPI_KEY, rapidApiKey)
+                .header(HEADER_RAPIDAPI_HOST, RAPIDAPI_HOST_VALUE)
                 .retrieve()
                 .bodyToMono(GeofencingSubscription.class)
                 .doOnSuccess(response -> log.info("Suscripcion obtenida: {}", response))
@@ -79,8 +83,8 @@ public class GeofencingService {
 
         return webClient.delete()
                 .uri("/geofencing-subscriptions/v0.3/subscriptions/{subscriptionId}", subscriptionId)
-                .header("X-Rapidapi-Key", rapidApiKey)
-                .header("X-Rapidapi-Host", "network-as-code.nokia.rapidapi.com")
+                .header(HEADER_RAPIDAPI_KEY, rapidApiKey)
+                .header(HEADER_RAPIDAPI_HOST, RAPIDAPI_HOST_VALUE)
                 .retrieve()
                 .bodyToMono(Void.class)
                 .doOnSuccess(response -> log.info("Suscripcion eliminada exitosamente"))
@@ -97,11 +101,11 @@ public class GeofencingService {
 
         return webClient.get()
                 .uri("/geofencing-subscriptions/v0.3/subscriptions")
-                .header("X-Rapidapi-Key", rapidApiKey)
-                .header("X-Rapidapi-Host", "network-as-code.nokia.rapidapi.com")
+                .header(HEADER_RAPIDAPI_KEY, rapidApiKey)
+                .header(HEADER_RAPIDAPI_HOST, RAPIDAPI_HOST_VALUE)
                 .retrieve()
                 .bodyToMono(GeofencingSubscription[].class)
-                .doOnSuccess(response -> log.info("Suscripciones obtenidas: {}", response.length))
+                .doOnSuccess(response -> log.info("Suscripciones obtenidas: {}", response != null ? response.length : 0))
                 .doOnError(error -> log.error("Error al listar suscripciones de geofencing", error));
     }
 
@@ -140,7 +144,7 @@ public class GeofencingService {
                 .protocol(request != null ? request.getProtocol() : "HTTP")
                 .sink(request != null ? request.getSink() : "https://example.com/notifications")
                 .types(request != null ? request.getTypes() :
-                       java.util.Arrays.asList("org.camaraproject.geofencing-subscriptions.v0.area-entered"))
+                       java.util.Collections.singletonList("org.camaraproject.geofencing-subscriptions.v0.area-entered"))
                 .config(config)
                 .startsAt(java.time.Instant.now().toString())
                 .expiresAt(java.time.Instant.now().plusSeconds(3600).toString())

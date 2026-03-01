@@ -1,10 +1,10 @@
 package com.talenArena.SafeZone.service;
 
-import com.talenArena.SafeZone.models.CreateSessionRequest;
-import com.talenArena.SafeZone.models.Device;
-import com.talenArena.SafeZone.models.DeviceIpv4Addr;
-import com.talenArena.SafeZone.models.QodSession;
-import com.talenArena.SafeZone.models.CreateQodSessionRequest;
+import com.talenArena.SafeZone.models.QoS.CreateSessionRequest;
+import com.talenArena.SafeZone.models.QoS.Device;
+import com.talenArena.SafeZone.models.QoS.DeviceIpv4Addr;
+import com.talenArena.SafeZone.models.QoS.QodSession;
+import com.talenArena.SafeZone.models.QoS.CreateQodSessionRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,4 +1,4 @@
-package com.talenArena.SafeZone.models;
+package com.talenArena.SafeZone.models.QoS;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

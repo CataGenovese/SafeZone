@@ -1,7 +1,7 @@
 package com.talenArena.SafeZone.controller;
 
-import com.talenArena.SafeZone.models.CreateGeofencingSubscriptionRequest;
-import com.talenArena.SafeZone.models.GeofencingSubscription;
+import com.talenArena.SafeZone.models.geofencing.CreateGeofencingSubscriptionRequest;
+import com.talenArena.SafeZone.models.geofencing.GeofencingSubscription;
 import com.talenArena.SafeZone.service.GeofencingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

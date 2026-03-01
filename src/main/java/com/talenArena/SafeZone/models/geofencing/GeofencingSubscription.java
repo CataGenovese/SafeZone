@@ -1,7 +1,6 @@
-package com.talenArena.SafeZone.models;
+package com.talenArena.SafeZone.models.geofencing;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.talenArena.SafeZone.models.geofencing.GeofencingSubscriptionConfig;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

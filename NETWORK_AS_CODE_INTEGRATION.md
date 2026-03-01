@@ -179,8 +179,8 @@ Si encuentras errores de conexión:
 - [QoD API Specification](https://github.com/camaraproject/QualityOnDemand)
 package com.talenArena.SafeZone.service;
 
-import com.talenArena.SafeZone.models.Device;
-import com.talenArena.SafeZone.models.DeviceIpv4Addr;
+import com.talenArena.SafeZone.models.QoS.Device;
+import com.talenArena.SafeZone.models.QoS.DeviceIpv4Addr;
 import com.talenArena.SafeZone.models.QodSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -201,11 +201,12 @@ public class DeviceIpv4Addr {
 ```
 
 **`Device.java`**
+
 ```java
 package com.talenArena.SafeZone.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import com.talenArena.SafeZone.models.QoS.DeviceIpv4Addr;import lombok.Builder;
 import lombok.Data;
 
 @Data
@@ -217,9 +218,11 @@ public class Device {
 ```
 
 **`CreateQodSessionRequest.java`**
+
 ```java
 package com.talenArena.SafeZone.models;
 
+import com.talenArena.SafeZone.models.QoS.Device;
 import lombok.Builder;
 import lombok.Data;
 
@@ -263,9 +266,8 @@ Este servicio contiene la lógica para llamar a los endpoints de la API de QoD (
 ```java
 package com.talenArena.SafeZone.service;
 
-import com.talenArena.SafeZone.models.Device;
 import com.talenArena.SafeZone.models.QodSession;
-import com.talenArena.SafeZone.models.CreateQodSessionRequest;
+import com.talenArena.SafeZone.models.QoS.CreateQodSessionRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -278,7 +280,7 @@ public class DeviceService {
 
     private final WebClient networkAsCodeWebClient;
 
-    public QodSession createQodSession(Device device, String serviceIpv4, String profile, Integer duration) {
+    public QodSession createQodSession(com.talenArena.SafeZone.models.QoS.Device device, String serviceIpv4, String profile, Integer duration) {
         log.info("Creando sesión QoD para el dispositivo con perfil: {} y duración: {}", profile, duration);
 
         CreateQodSessionRequest request = CreateQodSessionRequest.builder()
@@ -345,8 +347,8 @@ Para usar el servicio, puedes inyectarlo en un controlador y crear un endpoint.
 ```java
 package com.talenArena.SafeZone.controller;
 
-import com.talenArena.SafeZone.models.Device;
-import com.talenArena.SafeZone.models.DeviceIpv4Addr;
+import com.talenArena.SafeZone.models.QoS.Device;
+import com.talenArena.SafeZone.models.QoS.DeviceIpv4Addr;
 import com.talenArena.SafeZone.models.QodSession;
 import com.talenArena.SafeZone.service.DeviceService;
 import lombok.RequiredArgsConstructor;
