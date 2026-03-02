@@ -1,4 +1,4 @@
-package com.talenArena.SafeZone.dto;
+package com.talenArena.SafeZone.dto.SimSwap;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

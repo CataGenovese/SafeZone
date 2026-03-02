@@ -1,7 +1,7 @@
 package com.talenArena.SafeZone.controller;
 
-import com.talenArena.SafeZone.dto.SignInRequestDto;
-import com.talenArena.SafeZone.dto.SignInResponseDto;
+import com.talenArena.SafeZone.dto.SignIn.SignInRequestDto;
+import com.talenArena.SafeZone.dto.SignIn.SignInResponseDto;
 import com.talenArena.SafeZone.service.SignInService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

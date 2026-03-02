@@ -1,8 +1,8 @@
 package com.talenArena.SafeZone.controller;
 
-import com.talenArena.SafeZone.dto.KycMatchResponse;
-import com.talenArena.SafeZone.dto.PersonInfoRequest;
-import com.talenArena.SafeZone.dto.PersonInfoResponse;
+import com.talenArena.SafeZone.dto.Kyc.KycMatchResponse;
+import com.talenArena.SafeZone.dto.Kyc.PersonInfoRequest;
+import com.talenArena.SafeZone.dto.Kyc.PersonInfoResponse;
 import com.talenArena.SafeZone.service.KYCService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

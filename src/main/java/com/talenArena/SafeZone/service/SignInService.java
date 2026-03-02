@@ -1,7 +1,7 @@
 package com.talenArena.SafeZone.service;
 
-import com.talenArena.SafeZone.dto.SignInRequestDto;
-import com.talenArena.SafeZone.dto.SignInResponseDto;
+import com.talenArena.SafeZone.dto.SignIn.SignInRequestDto;
+import com.talenArena.SafeZone.dto.SignIn.SignInResponseDto;
 import com.talenArena.SafeZone.entities.Empleado;
 import com.talenArena.SafeZone.entities.Empresa;
 import com.talenArena.SafeZone.repository.EmpleadoRepository;

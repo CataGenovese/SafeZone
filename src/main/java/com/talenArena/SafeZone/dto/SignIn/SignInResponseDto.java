@@ -1,4 +1,4 @@
-package com.talenArena.SafeZone.dto;
+package com.talenArena.SafeZone.dto.SignIn;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignInRequestDto {
-
+public class SignInResponseDto {
     private String email;
-
     private String password;
 }
 

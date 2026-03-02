@@ -1,15 +1,13 @@
 package com.talenArena.SafeZone.controller;
 
-import com.talenArena.SafeZone.dto.LocationLastRequest;
-import com.talenArena.SafeZone.dto.LocationLastResponse;
-import com.talenArena.SafeZone.dto.LocationVerificationRequest;
-import com.talenArena.SafeZone.dto.PersonInfoRequest;
-import com.talenArena.SafeZone.dto.PersonInfoResponse;
+import com.talenArena.SafeZone.dto.Location.LocationLastRequest;
+import com.talenArena.SafeZone.dto.Location.LocationLastResponse;
+import com.talenArena.SafeZone.dto.Location.LocationVerificationRequest;
 import com.talenArena.SafeZone.service.LocationVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.talenArena.SafeZone.dto.Device;
+import com.talenArena.SafeZone.dto.Location.Device;
 @RestController
 @RequestMapping("/api/location-verification")
 public class LocationVerificationController {

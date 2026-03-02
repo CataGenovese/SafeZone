@@ -1,4 +1,4 @@
-package com.talenArena.SafeZone.dto;
+package com.talenArena.SafeZone.dto.Kyc;
 
 import lombok.Getter;
 import lombok.Setter;

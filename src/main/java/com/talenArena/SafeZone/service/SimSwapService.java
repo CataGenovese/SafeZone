@@ -1,7 +1,7 @@
 package com.talenArena.SafeZone.service;
 
-import com.talenArena.SafeZone.dto.SimSwapApiRequest;
-import com.talenArena.SafeZone.dto.SimSwapResponse;
+import com.talenArena.SafeZone.dto.SimSwap.SimSwapApiRequest;
+import com.talenArena.SafeZone.dto.SimSwap.SimSwapResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

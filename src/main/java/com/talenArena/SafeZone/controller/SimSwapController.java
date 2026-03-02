@@ -1,7 +1,7 @@
 package com.talenArena.SafeZone.controller;
 
-import com.talenArena.SafeZone.dto.SimSwapRequest;
-import com.talenArena.SafeZone.dto.SimSwapResponse;
+import com.talenArena.SafeZone.dto.SimSwap.SimSwapRequest;
+import com.talenArena.SafeZone.dto.SimSwap.SimSwapResponse;
 import com.talenArena.SafeZone.service.SimSwapService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

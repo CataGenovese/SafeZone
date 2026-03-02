@@ -1,9 +1,9 @@
 package com.talenArena.SafeZone.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.talenArena.SafeZone.dto.PersonInfoRequest;
-import com.talenArena.SafeZone.dto.PersonInfoResponse;
-import com.talenArena.SafeZone.dto.KycMatchResponse;
+import com.talenArena.SafeZone.dto.Kyc.PersonInfoRequest;
+import com.talenArena.SafeZone.dto.Kyc.PersonInfoResponse;
+import com.talenArena.SafeZone.dto.Kyc.KycMatchResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,11 @@ package com.talenArena.SafeZone.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.talenArena.SafeZone.dto.*;
+import com.talenArena.SafeZone.dto.Location.Area;
+import com.talenArena.SafeZone.dto.Location.Center;
+import com.talenArena.SafeZone.dto.Location.LocationLastRequest;
+import com.talenArena.SafeZone.dto.Location.LocationLastResponse;
+import com.talenArena.SafeZone.dto.Location.LocationVerificationRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
