@@ -25,12 +25,6 @@ public class AuthController {
 
     private final AuthService authService;
 
-    /**
-     * Endpoint de autenticación con verificaciones Nokia
-     *
-     * @param request Solicitud con phoneNumber
-     * @return AuthResponseDto con resultados de Location, KYC y SimSwap
-     */
     @PostMapping("/authentication")
     @Operation(
         summary = "Autenticación de usuario",
