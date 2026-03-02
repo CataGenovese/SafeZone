@@ -1,0 +1,9 @@
+# ignore build artifacts and local config
+target/
+*.log
+**/target/
+.mvn/
+.git
+.gitignore
+docker-compose.yml
+Dockerfile

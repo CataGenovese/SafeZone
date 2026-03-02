@@ -1,0 +1,6 @@
+# ignore local node_modules/build output when building frontend image
+node_modules/
+dist/
+build/
+.git
+.gitignore
