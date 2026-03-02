@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 export default function ChangePassword() {
+  const router = useRouter();
   const [pass, setPass] = useState('');
   const [status, setStatus] = useState(null);
   const [showOtp, setShowOtp] = useState(false);
@@ -29,7 +31,13 @@ export default function ChangePassword() {
   return (
     <div className="app-container">
       <div className="card">
-        <img src="/logo.png" className="logo" alt="logo" />
+        <img
+          src="/logo.png"
+          className="logo"
+          alt="logo"
+          style={{width:100, borderRadius:20, cursor:'pointer'}}
+          onClick={() => router.push('/dashboard')}
+        />
         <h1>Cambiar contraseña</h1>
         <p className="muted">Simula un cambio de contraseña seguro</p>
         <input type="password" placeholder="Nueva contraseña" value={pass} onChange={e => setPass(e.target.value)} />

@@ -22,6 +22,7 @@ export default function Login() {
       const action = resp.data.action;
       setStatus(action);
       if(action === 'ok'){
+        localStorage.setItem('isLoggedIn', 'true');
         setTimeout(()=> router.push('/dashboard'), 600);
       } else if(action === 'otp'){
         setShowOtp(true);
@@ -34,13 +35,14 @@ export default function Login() {
   const verifyOtp = () => {
     setShowOtp(false);
     setStatus('ok');
+    localStorage.setItem('isLoggedIn', 'true');
     setTimeout(()=> router.push('/dashboard'), 500);
   };
 
   return (
     <div className="app-container">
       <div className="card login">
-        <img src="/logo.png" className="logo" style={{width:84}} alt="logo" />
+        <img src="/logo.png" className="logo" style={{width:100,  borderRadius:20}} alt="logo" />
         <h1>DemoBank</h1>
         <p className="muted">Accede a tu cuenta de demo</p>
 
@@ -54,7 +56,7 @@ export default function Login() {
         {status === 'block' && <div className="status block">Acceso bloqueado por riesgo</div>}
 
         {showOtp && (
-          <div style={{marginTop:12}}>
+          <div className="login-otp" style={{marginTop:12}}>
             <input placeholder="Introduce OTP" value={otpValue} onChange={e=>setOtpValue(e.target.value)} />
             <button onClick={verifyOtp} style={{marginTop:8}}>Verificar OTP</button>
           </div>

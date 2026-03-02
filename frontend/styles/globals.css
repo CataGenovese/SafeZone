@@ -28,6 +28,10 @@ body {
 .card.login {
 	max-width:360px;
 	padding:32px 24px;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	text-align:center;
 }
 
 .login-input {
@@ -44,6 +48,16 @@ body {
 	color:#fff;
 }
 
+.card.login .status {
+	width:80%;
+	text-align:center;
+}
+
+.login-otp {
+	width:100%;
+	text-align:center;
+}
+
 .card{
 	background:var(--card);
 	border-radius:18px;
@@ -56,7 +70,7 @@ body {
 h1{ margin:8px 0 18px 0; font-weight:600; }
 
 input, select, textarea{
-	width:100%;
+	width:80%;
 	padding:12px 14px;
 	border-radius:12px;
 	border:1px solid #E6E9EE;
@@ -84,5 +98,19 @@ button{
 
 .logo{ display:block; margin:0 auto 12px auto; }
 .logo-large{ display:block; margin:0 auto 20px auto; width:120px; }
+
+.dashboard-actions{
+	margin-top:16px;
+	display:flex;
+	flex-direction:column;
+	gap:12px;
+	width:100%;
+}
+
+.dashboard-action-btn{
+	width:100%;
+	padding:14px 16px;
+	font-size:16px;
+}
 
 .small-link{ color:var(--accent); text-decoration:underline; cursor:pointer; }

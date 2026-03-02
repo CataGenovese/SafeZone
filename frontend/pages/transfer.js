@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 export default function Transfer() {
+  const router = useRouter();
   const [account, setAccount] = useState('');
   const [amount, setAmount] = useState('');
   const [status, setStatus] = useState(null);
@@ -32,7 +34,13 @@ export default function Transfer() {
   return (
     <div className="app-container">
       <div className="card">
-        <img src="/logo.png" className="logo" alt="logo" />
+        <img
+          src="/logo.png"
+          className="logo"
+          alt="logo"
+          style={{width:100, borderRadius:20, cursor:'pointer'}}
+          onClick={() => router.push('/dashboard')}
+        />
         <h1>Transferencia</h1>
         <p className="muted">Envía dinero de demo</p>
         <label>Cuenta destino</label>

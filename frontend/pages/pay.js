@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 export default function Pay() {
+  const router = useRouter();
   const [amount, setAmount] = useState('');
   const [status, setStatus] = useState(null);
   const [showOtp, setShowOtp] = useState(false);
@@ -30,7 +32,13 @@ export default function Pay() {
   return (
     <div className="app-container">
       <div className="card">
-        <img src="/logo.png" className="logo" alt="logo" />
+        <img
+          src="/logo.png"
+          className="logo"
+          alt="logo"
+          style={{width:100, borderRadius:20, cursor:'pointer'}}
+          onClick={() => router.push('/dashboard')}
+        />
         <h1>Pago online</h1>
         <input
           placeholder="Importe"
