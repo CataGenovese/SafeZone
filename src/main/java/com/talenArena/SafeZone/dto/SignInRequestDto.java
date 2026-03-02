@@ -1,14 +1,18 @@
 package com.talenArena.SafeZone.dto;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
-public class LoginDto {
+@AllArgsConstructor
+public class SignInRequestDto {
+
     private String email;
+
     private String password;
-    //Objetos de entrada APIs
 }
+
