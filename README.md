@@ -350,7 +350,6 @@ package com.talenArena.SafeZone.controller;
 import com.talenArena.SafeZone.models.QoS.Device;
 import com.talenArena.SafeZone.models.QoS.DeviceIpv4Addr;
 import com.talenArena.SafeZone.models.QodSession;
-import com.talenArena.SafeZone.service.DeviceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
