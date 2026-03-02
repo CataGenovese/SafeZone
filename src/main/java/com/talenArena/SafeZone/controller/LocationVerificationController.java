@@ -3,6 +3,8 @@ package com.talenArena.SafeZone.controller;
 import com.talenArena.SafeZone.dto.LocationLastRequest;
 import com.talenArena.SafeZone.dto.LocationLastResponse;
 import com.talenArena.SafeZone.dto.LocationVerificationRequest;
+import com.talenArena.SafeZone.dto.PersonInfoRequest;
+import com.talenArena.SafeZone.dto.PersonInfoResponse;
 import com.talenArena.SafeZone.service.LocationVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,4 +30,5 @@ public class LocationVerificationController {
         request.setMaxAge(maxAge);
         return locationVerificationService.getLastLocation(request);
     }
+
 }
