@@ -50,8 +50,6 @@ public class SignInService {
         return SignInResponseDto.builder()
                 .email(empleadoGuardado.getEmail())
                 .password(empleadoGuardado.getPassword())
-                .mensaje("Registro exitoso")
-                .success(true)
                 .build();
     }
 }

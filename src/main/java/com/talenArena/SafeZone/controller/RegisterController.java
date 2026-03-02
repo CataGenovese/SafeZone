@@ -43,26 +43,18 @@ public class RegisterController {
             description = "Error interno del servidor"
         )
     })
-    public ResponseEntity<SignInResponseDto> register(@Valid @RequestBody SignInRequestDto request) {
+    public ResponseEntity<Void> register(@Valid @RequestBody SignInRequestDto request) {
         try {
             log.info("Procesando registro para: {}", request.getEmail());
-            SignInResponseDto response = signInService.signIn(request);
+            signInService.signIn(request);
             log.info("Registro completado exitosamente para: {}", request.getEmail());
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (RuntimeException e) {
             log.warn("Fallo en registro para: {} - Error: {}", request.getEmail(), e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(SignInResponseDto.builder()
-                            .mensaje("Registro fallido: " + e.getMessage())
-                            .success(false)
-                            .build());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch (Exception e) {
             log.error("Error inesperado durante registro: {}", e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(SignInResponseDto.builder()
-                            .mensaje("Error interno del servidor")
-                            .success(false)
-                            .build());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }

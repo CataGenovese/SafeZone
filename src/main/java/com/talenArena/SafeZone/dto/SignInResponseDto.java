@@ -12,7 +12,5 @@ import lombok.NoArgsConstructor;
 public class SignInResponseDto {
     private String email;
     private String password;
-    private String mensaje;
-    private boolean success;
 }
 
