@@ -1,6 +1,6 @@
 -- Tabla Empresa
 CREATE TABLE empresa (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -8,7 +8,7 @@ CREATE TABLE empresa (
 
 -- Tabla Empleado (Usuarios de la empresa)
 CREATE TABLE empleado (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     empresa_id BIGINT NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -23,9 +23,9 @@ CREATE TABLE empleado (
 
 -- Tabla Cliente (vinculado a una empresa)
 CREATE TABLE cliente (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     empresa_id BIGINT NOT NULL,
-    datos VARCHAR(4000) NOT NULL,
+    datos JSONB NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_cliente_empresa FOREIGN KEY (empresa_id) REFERENCES empresa(id) ON DELETE CASCADE
@@ -33,7 +33,7 @@ CREATE TABLE cliente (
 
 -- Tabla API (catálogo de APIs disponibles de Nokia)
 CREATE TABLE api (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL UNIQUE,
     descripcion TEXT,
     endpoint VARCHAR(500) NOT NULL,
@@ -44,11 +44,11 @@ CREATE TABLE api (
 
 -- Tabla intermedia Empresa_API (relación muchos a muchos con estado de habilitación)
 CREATE TABLE empresa_api (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     empresa_id BIGINT NOT NULL,
     api_id BIGINT NOT NULL,
     habilitada BOOLEAN DEFAULT FALSE,
-    configuracion VARCHAR(4000),
+    configuracion JSONB,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_empresa_api_empresa FOREIGN KEY (empresa_id) REFERENCES empresa(id) ON DELETE CASCADE,
