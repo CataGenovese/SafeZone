@@ -1,6 +1,0 @@
-# ignore build artifacts when building backend image
-target/
-*.log
-.mvn/
-.git
-.gitignore

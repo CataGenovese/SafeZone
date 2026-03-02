@@ -1,28 +1,17 @@
-# SafeZone monorepo
+# SafeZone Project
 
-Este repositorio está organizado en dos paquetes principales:
+This repo contains two components:
 
-- `backend/` – aplicación Spring Boot con todo el código Java, el `pom.xml`, 
-  scripts Maven (`mvnw`) y un `Dockerfile` para construir el servicio.
-- `frontend/` – contenido estático o proyecto SPA (React/Vue/etc.) servido por
-  nginx, con su propio `Dockerfile`.
+* **frontend/** – Next.js demo bank app with built-in fraud API mocked
 
-En la raíz sólo encontrarás el `docker-compose.yml` que orquesta ambos servicios.
+To run the full stack with Docker, use the provided `docker-compose.yml` from the project root.
 
-## Cómo usar
-1. Entra en el directorio `backend` y construye el JAR:
-   ```bash
-   ./mvnw clean package -DskipTests
-   ```
-2. Desde la raíz ejecuta:
-   ```bash
-   docker-compose up --build
-   ```
+```bash
+docker-compose build
+docker-compose up
+```
 
-El backend queda en `localhost:8080` y el frontend en `localhost:3000`.
+The frontend will be available on port 3000, backend on 8080.
 
-## Mantener la estructura
-- Evita mezclar archivos de backend dentro de `frontend/` y viceversa.
-- Si necesitas agregar otros servicios (e.g. base de datos), extiende el
-  `docker-compose.yml` de la raíz.
+Frontend README contains more details: `cd frontend && cat README.md`.
 

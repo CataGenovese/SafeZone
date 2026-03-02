@@ -1,8 +1,22 @@
-# simple nginx image serving static frontend files
-FROM nginx:alpine
+FROM node:18-alpine AS base
+WORKDIR /app
+COPY package.json package-lock.json* ./
+RUN npm install
 
-# copy all frontend files (e.g. your built assets) into nginx html directory
-COPY . /usr/share/nginx/html
+FROM base AS dev
+COPY . .
+EXPOSE 3000
+CMD ["npm", "run", "dev", "--", "-H", "0.0.0.0", "-p", "3000"]
 
-# container listens on port 80 by default
-EXPOSE 80
+FROM base AS builder
+COPY . .
+RUN npm run build
+
+FROM node:18-alpine AS prod
+WORKDIR /app
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/public ./public
+EXPOSE 3000
+CMD ["npm","run","start"]
