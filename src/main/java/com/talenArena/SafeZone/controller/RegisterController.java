@@ -2,7 +2,7 @@ package com.talenArena.SafeZone.controller;
 
 import com.talenArena.SafeZone.dto.SignInRequestDto;
 import com.talenArena.SafeZone.dto.SignInResponseDto;
-import com.talenArena.SafeZone.service.SignInService;
+import com.talenArena.SafeZone.service.RegisterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class RegisterController {
 
-    private final SignInService signInService;
+    private final RegisterService registerService;
 
-    @PostMapping("/register")
+    @PostMapping("/register/admin")
     @Operation(summary = "Registro de nuevo usuario", description = "Registra un nuevo usuario en el sistema")
     @ApiResponses(value = {
         @ApiResponse(
@@ -46,7 +46,7 @@ public class RegisterController {
     public ResponseEntity<Void> register(@Valid @RequestBody SignInRequestDto request) {
         try {
             log.info("Procesando registro para: {}", request.getEmail());
-            signInService.signIn(request);
+            registerService.signIn(request);
             log.info("Registro completado exitosamente para: {}", request.getEmail());
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (RuntimeException e) {

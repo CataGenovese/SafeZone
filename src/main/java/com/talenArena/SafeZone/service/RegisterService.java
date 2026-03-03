@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class SignInService {
+public class RegisterService {
 
     private final EmpleadoRepository empleadoRepository;
     private final EmpresaRepository empresaRepository;

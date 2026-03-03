@@ -1,0 +1,18 @@
+package com.talenArena.SafeZone.dto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class CompanySignInRequestDto {
+    private String name;
+    private String email;
+    private CompanyType type;
+    private List<ApiType> apiType;
+}
