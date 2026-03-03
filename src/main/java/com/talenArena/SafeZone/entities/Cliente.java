@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "cliente", schema = "app")
 @Data
 @Builder
 @NoArgsConstructor
@@ -24,7 +24,7 @@ public class Cliente {
     @JoinColumn(name = "empresa_id", nullable = false)
     private Empresa empresa;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(4000)")
+    @Column(nullable = false)
     private String datos;
 
     @Column(name = "created_at")

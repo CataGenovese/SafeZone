@@ -11,6 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SafeZoneRequest {
 
+    // ID del cliente en BBDD para verificar datos
+    private Long clienteId;
+
+    // ID de la empresa para consultar APIs habilitadas
+    private Long empresaId;
+
     // Datos comunes
     private String phoneNumber;
 

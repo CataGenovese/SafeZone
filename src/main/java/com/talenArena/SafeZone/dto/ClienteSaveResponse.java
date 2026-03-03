@@ -9,14 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SafeZoneResponse {
-
-    private boolean success;
+public class ClienteSaveResponse {
+    private Long id;
+    private Long empresaId;
+    private String datos;
     private String message;
-
-    // Resultados individuales
-    private DataMatchResult dataMatch;
-    private SimSwapResult simSwap;
-    private LocationResult location;
-    private KycResult kyc;
 }
+
