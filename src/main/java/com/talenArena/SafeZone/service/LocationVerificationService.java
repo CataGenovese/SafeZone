@@ -1,43 +1,69 @@
 package com.talenArena.SafeZone.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.talenArena.SafeZone.dto.*;
+import io.netty.resolver.DefaultAddressResolverGroup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.netty.http.client.HttpClient;
+
+import java.time.Duration;
 
 @Service
 public class LocationVerificationService {
-    @Value("${network.as.code.api.url}")
+
+    private static final Logger log = LoggerFactory.getLogger(LocationVerificationService.class);
+
+    @Value("${location.verification.api.url}")
     private String apiUrl;
 
-    @Value("${network.as.code.rapidapi.host}")
+    @Value("${location.verification.rapidapi.host}")
     private String rapidApiHost;
 
-    @Value("${network.as.code.rapidapi.key}")
+    @Value("${location.verification.rapidapi.key}")
     private String rapidApiKey;
 
-    @Value("${network.as.code.mock.enabled:false}")
+    @Value("${location.verification.mock.enabled:false}")
     private boolean mockEnabled;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    public String verifyLocation(LocationVerificationRequest request) {
+        log.info("Verificando ubicación para: {}", request);
 
-    public ResponseEntity<String> verifyLocation(LocationVerificationRequest request) {
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("x-rapidapi-host", rapidApiHost);
-        headers.set("x-rapidapi-key", rapidApiKey);
+        HttpClient httpClient = HttpClient.create()
+                .resolver(DefaultAddressResolverGroup.INSTANCE)
+                .responseTimeout(Duration.ofSeconds(10));
+
+        WebClient webClient = WebClient.builder()
+                .baseUrl(apiUrl)
+                .clientConnector(new ReactorClientHttpConnector(httpClient))
+                .defaultHeader("x-rapidapi-key", rapidApiKey)
+                .defaultHeader("x-rapidapi-host", rapidApiHost)
+                .defaultHeader("Content-Type", "application/json")
+                .build();
+
         try {
-            String jsonBody = objectMapper.writeValueAsString(request);
-            System.out.println("JSON enviado a Nokia API: " + jsonBody);
-            HttpEntity<String> entity = new HttpEntity<>(jsonBody, headers);
-            return restTemplate.exchange(apiUrl, HttpMethod.POST, entity, String.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error serializando JSON");
+            String response = webClient.post()
+                    .uri("/verify")
+                    .bodyValue(request)
+                    .retrieve()
+                    .onStatus(status -> status.isError(), clientResponse ->
+                            clientResponse.bodyToMono(String.class)
+                                    .map(body -> {
+                                        log.error("Error de la API - Status: {}, Body: {}", clientResponse.statusCode(), body);
+                                        return new RuntimeException("API Error [" + clientResponse.statusCode() + "]: " + body);
+                                    })
+                    )
+                    .bodyToMono(String.class)
+                    .block();
+
+            log.info("Respuesta de Location Verification: {}", response);
+            return response;
+        } catch (Exception e) {
+            log.error("Error al verificar ubicación: {}", e.getMessage(), e);
+            throw new RuntimeException("Error en la verificación de ubicación", e);
         }
     }
 
@@ -56,8 +82,6 @@ public class LocationVerificationService {
             return response;
         }
         // Aquí iría la llamada real a la API externa si no es mock
-        // Puedes implementar la lógica real según la documentación de la API
         return null;
     }
 }
-

@@ -1,8 +1,11 @@
 package com.talenArena.SafeZone.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -14,6 +17,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 @EnableWebSecurity
 public class AppConfig {
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
 
     // ===============================
     // NETWORK AS CODE CONFIG
@@ -49,6 +57,11 @@ public class AppConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/location-verification/**").permitAll()
                         .requestMatchers("/api/kyc-fill-in/**").permitAll()
+                        // API Orquestador: SafeZone Full Check
+                        .requestMatchers(HttpMethod.PUT, "/api/safezone/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/safezone/**").permitAll()
+                        .requestMatchers("/api/safezone/**").permitAll()
+                        // Swagger UI y documentación
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
