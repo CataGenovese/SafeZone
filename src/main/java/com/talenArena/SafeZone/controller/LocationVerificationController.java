@@ -18,7 +18,8 @@ public class LocationVerificationController {
 
     @PostMapping("/verify")
     public ResponseEntity<String> verifyLocation(@RequestBody LocationVerificationRequest request) {
-        return locationVerificationService.verifyLocation(request);
+        String response = locationVerificationService.verifyLocation(request);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/last-location")

@@ -65,6 +65,8 @@ public class AppConfig {
                         .requestMatchers("/api/sim-swap/**").permitAll()
                         // API 3: KYC Fill-In
                         .requestMatchers("/api/kyc-fill-in/**").permitAll()
+                        // API Orquestador: SafeZone Full Check
+                        .requestMatchers("/api/safezone/**").permitAll()
                         // Swagger UI y documentación
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
